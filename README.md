@@ -15,7 +15,7 @@
 
 ## 開發環境部署/安裝
 
-本項目代碼使用PHP 框架 Laravel 9.36 開發。
+本項目代碼使用PHP 框架 Laravel 9.19 開發。
 
 下文將在假定讀者已經安裝好了 Homestead 的情況下進行說明。如果您還未安裝 Homestead，可以參照 [Homestead 安裝與設置](https://learnku.com/docs/laravel/5.5/homestead#installation-and-setup) 進行安裝配置。
 
