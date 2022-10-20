@@ -23,7 +23,7 @@ class AuthController extends Controller
         $result = Auth::attempt(['email' => $email, 'guid' => null, 'channel' => null, 'password' => $password, 'is_admin' => true], false);
         Log::info($result);
         if($result) {
-            return redirect(route('home'));
+            return redirect(route('admin.notify.index'));
         } else {
             return back()->with('message', 'Login failed!');
         }
