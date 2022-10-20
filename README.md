@@ -1,6 +1,7 @@
 ## 項目概述
 
 * 名稱： Demo OAuth 2.0 Site
+* Demo link: http://oauth2-demo.eastasia.cloudapp.azure.com/
 
 ## 功能如下
 
