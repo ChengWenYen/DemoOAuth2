@@ -59,16 +59,54 @@ class OAuthController extends Controller
             ]);
         } else {
             $user->update([
+                'name' => $userData->name,
+                'picture' => $userData->picture,
+                'email' => $userData->email,
                 'access_token' => $accessToken,
                 'token_type' => $tokenType,
                 'refresh_token' => $refreshToken,
                 'expires_in' => $expiresIn,
-                'scope' => $scope
+                'scope' => $scope,
+                'raw_id_token' => $idToken,
             ]);
         }
 
         Auth::attempt(['guid' => $userData->sub, 'channel' => 'line', 'password' => 'empty']);
-        Log::info(Auth::user());
+        return redirect(route('home'));
     }
 
+    public function lineNotifyLoginCallback(Request $request)
+    {
+        $code = $request['code'];
+        $state = $request['state'];
+
+        $client = new Client(['base_uri' => 'https://notify-bot.line.me']);
+        $response = $client->request('POST',
+            '/oauth/token',
+            [
+                'form_params' => [
+                    'client_id' => env('LINE_NOTIFY_CLIENT_ID'),
+                    'client_secret' => env('LINE_NOTIFY_CLIENT_SECRET'),
+                    'grant_type' => 'authorization_code',
+                    'code' => $code,
+                    'redirect_uri' => env('APP_URL')."/oauth/member/v2/line/notify/login/callback"
+                ]
+            ]);
+        
+        $responseData = json_decode($response->getBody());
+        $accessToken = $responseData->access_token;
+        
+        $user = Auth::user();
+        $user->update([
+            'notify_access_token' => $accessToken
+        ]);
+
+        return redirect(route('home'));
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('login'));
+    }
 }

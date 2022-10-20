@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'is_admin',
         'guid',
         'channel',
         'name',
@@ -30,6 +31,7 @@ class User extends Authenticatable
         'expires_in',
         'scope',
         'password',
+        'notify_access_token'
     ];
 
     /**

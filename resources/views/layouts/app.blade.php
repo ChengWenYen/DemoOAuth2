@@ -4,9 +4,16 @@
     @include('layouts.head')
 </head>
 <body class="hold-transition">
-
-    @yield('content')
-
+    <div class="wrapper">
+        @auth
+            @include('layouts.navbar')
+            @include('layouts.sidebar')
+        @endauth
+        @yield('content')
+        @auth
+            @include('layouts.footer')
+        @endauth
+    </div>
     @include('layouts.js')
     @yield('scripts')
 </body>

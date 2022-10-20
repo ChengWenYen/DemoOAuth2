@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('guid');
-            $table->string('channel');
+            $table->boolean('is_admin')->default(false);
+            $table->string('guid')->nullable();
+            $table->string('channel')->nullable();
             $table->string('name');
             $table->text('picture')->nullable();
             $table->string('email')->nullable();
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
+            $table->text('notify_access_token')->nullable();
             $table->timestamps();
         });
     }
