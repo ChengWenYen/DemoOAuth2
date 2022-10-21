@@ -14,10 +14,10 @@
                     </a>
                     {{--  <a href="#" class="btn btn-block btn-primary">
                         <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                     </a>  --}}
+                    <a href="javascript:;" class="btn btn-block btn-danger" onclick="googleOAuthLogin()">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
                 </div>
             </div>
         </div>
@@ -26,6 +26,16 @@
 @endsection
 @section('scripts')
 <script>
+    function googleOAuthLogin() {
+        const root_uri = "https://accounts.google.com/o/oauth2/v2/auth";
+        const client_id = "{{ env('GOOGLE_CLIENT_ID') }}";
+        const redirect_uri = "{{ env('APP_HTTPS_URL') }}"+"/oauth/member/v2/google/login/callback";
+        const state = "123123";
+        const scope = "email%20profile%20openid";
+        const uri = `${root_uri}?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}&scope=${scope}`;
+        window.location.href = uri;
+    }
+
     function lineOAuthLogin() {
         const root_uri = "https://access.line.me/oauth2/v2.1/authorize";
         const client_id = "{{ env('LINE_CLIENT_ID') }}";

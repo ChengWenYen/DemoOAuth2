@@ -39,6 +39,7 @@ Route::get('/', [OAuthController::class, 'show'])->name('login');
 
 Route::prefix('oauth/member/v2/')->group(function() {
     Route::get('line/login/callback', [OAuthController::class, 'lineLoginCallback']);
+    Route::get('google/login/callback', [OAuthController::class, 'googleLoginCallback']);
 
     Route::get('line/notify/login/callback', [OAuthController::class, 'lineNotifyLoginCallback'])->middleware('auth');
 });
