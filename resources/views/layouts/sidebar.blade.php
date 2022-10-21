@@ -30,17 +30,25 @@
                 @if (Auth::user()->is_admin)
                     <li class="nav-header">MANAGEMENTS</li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.notify.index') }}" class="nav-link">
+                        <a href="{{ route('admin.notify.index') }}" class="nav-link @if (Route::is('admin.notify.index')) active @endif">
                             <i class="nav-icon fas fa-bullhorn"></i>
                             <p>
                                 LINE Notify
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.users.index') }}" class="nav-link @if (Route::is('admin.users.index')) active @endif">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Users
+                            </p>
+                        </a>
+                    </li>
                 @endif
                 <li class="nav-header">MISCELLANEOUS</li>
                 <li class="nav-item">
-                    <a href="{{ route('home') }}" class="nav-link">
+                    <a href="{{ route('home') }}" class="nav-link @if (Route::is('home')) active @endif">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Home

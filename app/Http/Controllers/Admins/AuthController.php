@@ -13,6 +13,13 @@ class AuthController extends Controller
 {
     public function show()
     {
+        if(Auth::check()) {
+            if(Auth::user()->is_admin) {
+                return redirect(route('admin.notify.index'));
+            } else {
+                return redirect(route('home'));
+            }
+        }
         return view('admins.login');
     }
 

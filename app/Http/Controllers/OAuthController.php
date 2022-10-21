@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class OAuthController extends Controller
 {
+    public function show()
+    {
+        if(Auth::check()) {
+            return redirect(route('home'));
+        } else {
+            return view('login');
+        }
+    }
+
     public function lineLoginCallback(Request $request)
     {
         $code = $request['code'];
